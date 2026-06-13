@@ -1,0 +1,37 @@
+name: Tagih_id-dev
+
+services:
+  tagih_id-redis-dev:
+    image: redis:latest
+    container_name: tagih_id_redis_dev
+    restart: always
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - tagih_id_redis_data:/data
+    networks:
+      - tagih_id_network
+
+  tagih_id-postgres-dev:
+    image: postgres:latest
+    container_name: tagih_id_postgres_dev
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRE_DB}
+      POSTGRES_USER: ${POSTGRE_USER}
+      POSTGRES_PASSWORD: ${POSTGRE_PASSWORD}
+    ports:
+      - "${POSTGRE_PORT}:5432"
+    env_file:
+      - .env
+    volumes:
+      - tagih_id_postgre_data:/var/lib/postgresql/data
+    networks:
+      - tagih_id_network
+
+networks:
+  tagih_id_network:
+
+volumes:
+  tagih_id_redis_data:
+  tagih_id_postgre_data:
