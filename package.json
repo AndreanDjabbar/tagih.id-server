@@ -8,6 +8,7 @@
     "dev": "nodemon src/index.js",
     "docker-up": "docker-compose --env-file .env up -d",
     "prisma-migrate": "npx prisma migrate dev",
+    "prisma-seed": "node prisma/seed.js",
     "prisma-reset": "npx prisma migrate reset --force",
     "prisma-generate": "npx prisma generate",
     "prisma-pull": "npx prisma db pull"

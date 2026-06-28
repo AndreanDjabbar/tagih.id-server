@@ -1,4 +1,4 @@
-import logger from "./logger.config.js";
+import logger from "../../logs/logger.js";
 import postgres from "postgres";
 import {PrismaClient} from '../../prisma/generated/prisma/index.js';
 import { POSTGRE_PORT, DATABASE_URL } from "../util/env.util.js";
