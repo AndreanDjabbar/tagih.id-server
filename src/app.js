@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import logger from "./config/logger.config.js";
 import prisma from "./config/postgres.config.js";
 import { getRedisClient } from "./config/redis.config.js";
-import { NODE_ENV } from "./util/env.util.js";
+import { ALLOWED_ORIGINS, NODE_ENV } from "./util/env.util.js";
 import authRoutes from "./router/auth.router.js";
 import userRoutes from "./router/user.router.js";
 import cors from "cors";
@@ -18,7 +18,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ALLOWED_ORIGINS,
     credentials: true,
   })
 );
@@ -57,8 +57,8 @@ NODE_ENV === "development"
       })
     );
 
-app.use("/dinehub/api/auth", authRoutes);
-app.use("/dinehub/api/user", userRoutes);
+app.use("/tagihid/api/auth", authRoutes);
+app.use("/tagihid/api/user", userRoutes);
 
 app.use(errorHandler)
 
