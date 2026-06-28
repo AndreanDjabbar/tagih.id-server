@@ -1,17 +1,21 @@
-import app from './app.js'
-import { logger } from './config/logger.js'
+import "../src/config/env.config.js";
+import app from "./app.js";
+import logger from "./config/logger.config.js";
 
-app.get('/', async function handler (request, reply) {
-    return { hello: 'world' }
-})
+import { HOST, PORT, NODE_ENV } from "./util/env.util.js";
 
-try {
-    logger.info(`SERVER IS RUNNING ON ${process.env.NODE_ENV} ENVIRONMENT`)
-    await app.listen({ 
-        port: process.env.HOST_PORT, 
-        host: process.env.HOST,
-    })
-} catch (err) {
-    logger.error(err)
-    process.exit(1)
+const startServer = async() => {
+    try {
+        await app.listen({
+            host: HOST,
+            port: PORT,
+        })
+        logger.info(`Server started in ${NODE_ENV} mode`);
+        logger.info(`Server running in ${process.env.NODE_ENV} mode on http://${HOST}:${PORT}`);
+    } catch(e) {
+        logger.error(`Error starting server: ${e.message}`);
+        process.exit(1);
+    }
 }
+
+startServer();
